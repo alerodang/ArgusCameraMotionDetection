@@ -9,6 +9,12 @@ This is a maven project
 
 2) Execute jar 
     
+    Windows:
+    
     ``java -jar target\argus-camera-motion-detection-1.0-SNAPSHOT-shaded.jar "c:/folder"``
+    
+    Linux:
+    
+    ``java -jar target/argus-camera-motion-detection-1.0-SNAPSHOT-shaded.jar "c:/folder"``
     
     Please pay attention in the argument, this argument is the directory where captured images will be saved. If the specified directory does not exists it will be created by the program.
