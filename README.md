@@ -1,4 +1,4 @@
-# Argu Camera Motion Detection
+# Argus Camera Motion Detection
 
 This is a video motion detection software, developed as part of argus ecosystem and used for building camera modules.
 
