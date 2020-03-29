@@ -7,20 +7,13 @@ import java.util.Date;
 
 class ImageService {
 
-    private String directory;
-
-    ImageService(String folder) {
-        this.directory = folder;
-    }
-
-    void setFolder(){
-        File file = new File(this.directory);
+    void setFolder(String path){
+        File file = new File(path);
         boolean dirCreated = file.mkdir();
         System.out.println("Created directory: " + dirCreated);
     }
 
-    void saveImage(Mat imageMatrix) {
-        String date = new SimpleDateFormat("yyyyMMdd-HHmmssSSSS").format(new Date());
-        Imgcodecs.imwrite(this.directory + "/" + date + ".jpg", imageMatrix);
+    void saveImage(Mat imageMatrix, String path) {
+        Imgcodecs.imwrite(path, imageMatrix);
     }
 }
