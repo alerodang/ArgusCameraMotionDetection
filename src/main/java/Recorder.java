@@ -39,7 +39,7 @@ class Recorder {
             if (cameraService.detectMovement(previousGrayFrame, newFrameGrayScale, 5000)) {
                 System.out.println("Motion detected!!!");
 
-                String date = new SimpleDateFormat("yyyyMMdd-HHmmssSSSS").format(new Date());
+                String date = new SimpleDateFormat("yyyyMMddHHmmssSSSS").format(new Date());
                 String path = this.path + "/" + date + ".jpg";
                 Map <String, String> data = new HashMap<>();
                 data.put("path", path);
