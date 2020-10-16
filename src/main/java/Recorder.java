@@ -9,18 +9,22 @@ import java.util.concurrent.TimeUnit;
 
 class Recorder {
 
+    private int movementSensibility;
+    private int millisecondsBetweenCaptures;
     private CameraService cameraService;
     private ImageService imageService;
     private RabbitmqService rabbitmqService;
     private String path;
     private String mqHost;
 
-    Recorder(String path, String mqHost) {
+    Recorder(String path, String mqHost, int movementSensibility, int millisecondsBetweenCaptures) {
         this.cameraService = new CameraService();
         this.imageService = new ImageService();
         this.rabbitmqService = new RabbitmqService();
         this.path = path;
         this.mqHost = mqHost;
+        this.movementSensibility =  movementSensibility; //5000
+        this.millisecondsBetweenCaptures = millisecondsBetweenCaptures;
     }
 
     void start() throws Exception {
@@ -36,7 +40,7 @@ class Recorder {
             newFrame = cameraService.getFrame();
             newFrameGrayScale = cameraService.getGrayScaleFrame(newFrame);
 
-            if (cameraService.detectMovement(previousGrayFrame, newFrameGrayScale, 5000)) {
+            if (cameraService.detectMovement(previousGrayFrame, newFrameGrayScale, this.movementSensibility)) {
                 System.out.println("Motion detected!!!");
 
                 String date = new SimpleDateFormat("yyyyMMddHHmmssSSSS").format(new Date());
@@ -52,7 +56,7 @@ class Recorder {
 
             previousGrayFrame = newFrameGrayScale;
 
-            TimeUnit.MILLISECONDS.sleep(500);
+            TimeUnit.MILLISECONDS.sleep(this.millisecondsBetweenCaptures);
         }
     }
 }
