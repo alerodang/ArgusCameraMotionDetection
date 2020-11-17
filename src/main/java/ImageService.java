@@ -2,8 +2,6 @@ import org.opencv.core.Mat;
 import org.opencv.imgcodecs.Imgcodecs;
 
 import java.io.File;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 class ImageService {
 

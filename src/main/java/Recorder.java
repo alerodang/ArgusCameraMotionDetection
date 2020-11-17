@@ -9,13 +9,13 @@ import java.util.concurrent.TimeUnit;
 
 class Recorder {
 
-    private int movementSensibility;
-    private int millisecondsBetweenCaptures;
-    private CameraService cameraService;
-    private ImageService imageService;
-    private RabbitmqService rabbitmqService;
-    private String path;
-    private String mqHost;
+    private final int movementSensibility;
+    private final int millisecondsBetweenCaptures;
+    private final CameraService cameraService;
+    private final ImageService imageService;
+    private final RabbitmqService rabbitmqService;
+    private final String path;
+    private final String mqHost;
 
     Recorder(String path, String mqHost, int movementSensibility, int millisecondsBetweenCaptures) {
         this.cameraService = new CameraService();
@@ -32,18 +32,18 @@ class Recorder {
         cameraService.openCamera(1920, 1080);
 
         Mat previousGrayFrame = cameraService.getGrayScaleFrame(cameraService.getFrame());
-        Mat newFrame;
-        Mat newFrameGrayScale;
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMddHHmmssSSSS");
+        Gson gson = new Gson();
 
         while (true) {
-            Gson gson = new Gson();
-            newFrame = cameraService.getFrame();
-            newFrameGrayScale = cameraService.getGrayScaleFrame(newFrame);
+            Mat newFrame = cameraService.getFrame();
+            Mat newFrameGrayScale = cameraService.getGrayScaleFrame(newFrame);
 
             if (cameraService.detectMovement(previousGrayFrame, newFrameGrayScale, this.movementSensibility)) {
                 System.out.println("Motion detected!!!");
 
-                String date = new SimpleDateFormat("yyyyMMddHHmmssSSSS").format(new Date());
+                String date = simpleDateFormat.format(new Date());
                 String path = this.path + "/" + date + ".jpg";
                 Map <String, String> data = new HashMap<>();
                 data.put("path", path);

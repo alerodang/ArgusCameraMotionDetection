@@ -8,7 +8,7 @@ public class Main {
         String movementSensibility = System.getenv("MOVEMENT_SENSIBILITY");
         String millisecondsBetweenCaptures = System.getenv("MILLISECONDS_BETWEEN_CAPTURES");
         System.out.println(mqHost);
-        OpenCV.loadShared();
+        OpenCV.loadLocally();
         Recorder recorder = new Recorder(capturesFolder, mqHost, Integer.parseInt(movementSensibility), Integer.parseInt(millisecondsBetweenCaptures));
         recorder.start();
     }

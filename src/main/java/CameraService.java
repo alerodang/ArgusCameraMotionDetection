@@ -7,7 +7,7 @@ import java.util.List;
 
 class CameraService {
 
-    private VideoCapture camera = new VideoCapture();
+    private final VideoCapture camera = new VideoCapture();
     private int count = 0;
 
     Mat getGrayScaleFrame(Mat frame) {
@@ -17,10 +17,10 @@ class CameraService {
         return greyScaleFrame;
     }
 
-    void openCamera(int width, int heigth) throws InterruptedException {
+    void openCamera(int width, int height) throws InterruptedException {
         camera.open(0); //open camera
         camera.set(3, width);
-        camera.set(4, heigth);
+        camera.set(4, height);
         Thread.sleep(3000);
     }
 
