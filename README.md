@@ -7,6 +7,10 @@ This is a maven project
 
 1) Generate a jar using maven
 
+    ```mvn clean install -U dependency:copy-dependencies```
+    
+    After this command jar file can be found under target folder as *argus-camera-motion-detection-1.0-SNAPSHOT-shaded.jar*
+
 2) Execute jar 
     
     Windows:
